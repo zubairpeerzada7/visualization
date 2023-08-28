@@ -1,0 +1,15 @@
+.container {
+}
+.chart {
+  margin: 0;
+  @media (min-width: 768px) {
+    margin: 2rem;
+    margin-top: 0;
+  }
+}
+
+.loader{
+  text-align: center;
+  font-size: 3rem;
+  margin: 3rem;
+}
