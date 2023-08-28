@@ -32,10 +32,10 @@ export function BarChart(props) {
     responsive: true,
     scales: {
       x: {
-        stacked: true,
+        stacked: false,
       },
       y: {
-        stacked: true,
+        stacked: false,
       },
     },
   };
@@ -63,8 +63,14 @@ export function BarChart(props) {
       {
         label: "Intensity",
         data: labels.map((label) => {
-          const found = recordsData.find((item) => item[chartType] === label);
-          return found ? found.intensity : 0;
+          const found = recordsData
+            .filter((item) => item[chartType] === label)
+            .map((e) => e.intensity);
+
+          return [
+            [...found].sort((a, b) => a - b)[0],
+            [...found].sort((a, b) => a - b)[found.length - 1],
+          ];
         }),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -73,8 +79,13 @@ export function BarChart(props) {
       {
         label: "Likelihood",
         data: labels.map((label) => {
-          const found = recordsData.find((item) => item[chartType] === label);
-          return found ? found.likelihood : 0;
+          const found = recordsData
+            .filter((item) => item[chartType] === label)
+            .map((e) => e.likelihood);
+          return [
+            [...found].sort((a, b) => a - b)[0],
+            [...found].sort((a, b) => a - b)[found.length - 1],
+          ];
         }),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -83,9 +94,13 @@ export function BarChart(props) {
       {
         label: "Relevance",
         data: labels.map((label) => {
-          const found = recordsData.find((item) => item[chartType] === label);
-
-          return found ? found.relevance : 0;
+          const found = recordsData
+            .filter((item) => item[chartType] === label)
+            .map((e) => e.relevance);
+          return [
+            [...found].sort((a, b) => a - b)[0],
+            [...found].sort((a, b) => a - b)[found.length - 1],
+          ];
         }),
         borderColor: "rgb(22, 32, 333)",
         backgroundColor: "rgba(321, 22, 43, 0.5)",
